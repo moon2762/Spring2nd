@@ -10,4 +10,6 @@ public class Chicken implements Food {
     public void eat() {
         System.out.println("치킨을 먹습니다.");
     }
+
+
 }
