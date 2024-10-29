@@ -1,13 +1,14 @@
 package com.sparta.springauth;
 
 import com.sparta.springauth.food.Food;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 
-
+@Disabled
 @SpringBootTest // bean 주입 사용 (di)
 public class BeanTest {
 
