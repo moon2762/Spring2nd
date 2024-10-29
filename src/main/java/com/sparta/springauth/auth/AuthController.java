@@ -24,8 +24,9 @@ public class AuthController {
     public static final String AUTHORIZATION_HEADER = "Authorization";
 
 
-    private final JwtUtil jwtUtil; //    JwtUtil을 component로 빈 등록을 해놔서 가져오기 위한 작업 (생성자로 주입하기)
-        // @RequiredArgsConstructor 로 사용 가능 생성자로 사용할때 final을 사용해서 변경이 불가능하게 만든다
+    private final JwtUtil jwtUtil; //    JwtUtil 을 component 빈 등록을 해놔서 가져오기 위한 작업 (생성자로 주입하기)
+        // @RequiredArgsConstructor(@Autowired 를 사용하지 않아도 됨) 로 생성자 주입하기 final 을 사용하여 불변한 상태로 사용한다.
+
 
 
     @GetMapping("/create-cookie")
