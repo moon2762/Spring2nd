@@ -47,6 +47,7 @@ public class WebSecurityConfig {
     }
 
     @Bean
+    // security 관련 설정은  securitychain 에서 해야함
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         // CSRF 설정
         http.csrf((csrf) -> csrf.disable());
@@ -72,6 +73,14 @@ public class WebSecurityConfig {
         http.addFilterBefore(jwtAuthorizationFilter(), JwtAuthenticationFilter.class);
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
          // UsernamePasswordAuthenticationFilter 수행 전에 addFilterBefore(jwtAuthenticationFilter 를 먼저 실행하기 위함.
+
+        // 접근 불가 페이지
+        http.exceptionHandling((exceptionHandling) ->
+                exceptionHandling
+                        // 접근 불가 페이지 설정
+                        .accessDeniedPage("/forbidden.html")
+        );
+
 
         return http.build();
     }
