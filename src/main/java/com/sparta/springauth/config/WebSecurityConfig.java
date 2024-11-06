@@ -1,7 +1,7 @@
 package com.sparta.springauth.config;
 
-import com.sparta.springauth.jwt.JwtAuthorizationFilter;
 import com.sparta.springauth.jwt.JwtAuthenticationFilter;
+import com.sparta.springauth.jwt.JwtAuthorizationFilter;
 import com.sparta.springauth.jwt.JwtUtil;
 import com.sparta.springauth.security.UserDetailsServiceImpl;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -35,7 +34,7 @@ public class WebSecurityConfig {
         return configuration.getAuthenticationManager();
     }
 
-    @Bean
+    @Bean // 인증 필터 빈 등록
     public JwtAuthenticationFilter jwtAuthenticationFilter() throws Exception {
         JwtAuthenticationFilter filter = new JwtAuthenticationFilter(jwtUtil);
         filter.setAuthenticationManager(authenticationManager(authenticationConfiguration));
@@ -72,6 +71,7 @@ public class WebSecurityConfig {
         // 필터 관리
         http.addFilterBefore(jwtAuthorizationFilter(), JwtAuthenticationFilter.class);
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+         // UsernamePasswordAuthenticationFilter 수행 전에 addFilterBefore(jwtAuthenticationFilter 를 먼저 실행하기 위함.
 
         return http.build();
     }
