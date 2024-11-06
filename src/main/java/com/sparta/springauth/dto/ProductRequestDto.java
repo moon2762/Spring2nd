@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 public class ProductRequestDto {
-    @NotBlank
+    @NotBlank(message ="@@@")
     private String name;
     @Email
     private String email;
